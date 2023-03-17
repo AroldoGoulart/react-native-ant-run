@@ -1,26 +1,16 @@
 /* eslint-disable react-native/no-inline-styles */
-import {useTheme} from '@contexts/libs/theme';
+import {useTheme} from '../../contexts/libs/theme';
 import React from 'react';
 import {
   ActivityIndicator,
   Text,
-  TextProps,
   TouchableOpacity,
   View,
-  ViewStyle,
 } from 'react-native';
+import { useStyle } from './styles';
+import { ButtonProps } from './types';
 
-const Button = (props: {
-  text: string | number;
-  onPress: () => void;
-  isLoading?: boolean;
-  customStyle?: ViewStyle;
-  variant?: 'primary' | 'secondary';
-  textProprieties?: TextProps;
-  startAdornment?: React.ReactNode;
-  endAdornment?: React.ReactNode;
-  disabled?: boolean;
-}) => {
+const Button = (props: ButtonProps) => {
   const {
     text,
     onPress,
@@ -30,40 +20,29 @@ const Button = (props: {
     startAdornment,
     endAdornment,
     disabled,
+    variant = `primary`
   } = props;
 
   const {colors} = useTheme();
-
-  const bg = {
-    ['primary']: colors.primary[500],
-    ['secondary']: colors.secondary[600],
-  };
+  const styles = useStyle(colors);
 
   return (
     <TouchableOpacity
       disabled={isLoading || disabled}
-      style={{
-        height: 50,
-        backgroundColor: bg[props.variant || 'primary'],
-        borderRadius: 5,
-        alignContent: 'center',
-        justifyContent: 'center',
-        alignItems: 'center',
-        ...customStyle,
-      }}
+      style={[
+        styles.container,
+        styles[variant],
+        { opacity: isLoading || disabled ? 0.95 : 1 },
+        customStyle,
+      ]}
       onPress={onPress}>
       {isLoading && (
-        <ActivityIndicator size="small" color={colors.primary[500]} />
+        <ActivityIndicator size="large" color={colors.textAlt} />
       )}
       {!isLoading && (
-        <View
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}>
+        <View style={styles.loadingView}>
           {startAdornment && startAdornment}
-          <Text style={{color: colors.text}} {...textProprieties}>
+          <Text style={[styles.text, textProprieties]}>
             {text}
           </Text>
           {endAdornment && endAdornment}

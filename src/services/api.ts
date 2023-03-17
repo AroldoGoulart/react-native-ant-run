@@ -1,4 +1,4 @@
-import {BASE_URL} from '@env';
+import { BASE_URL } from '@env';
 
 export const API = async <T>(
   path: string,

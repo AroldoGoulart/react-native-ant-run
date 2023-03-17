@@ -2,25 +2,25 @@ module.exports = function (api) {
   api.cache(true);
 
   const presets = ['module:metro-react-native-babel-preset'];
-  const moduleResolver = [
+
+  const plugins = ['module:react-native-dotenv'];
+
+  plugins.push([
     'module-resolver',
     {
-      root: ['./'],
-      extensions: ['.ios.js', '.android.js', '.js', '.ts', '.tsx', '.json'],
+      root: ['./src'],
       alias: {
-        '@': './src',
-        '@assets': './assets',
+        '@assets': './src/assets',
         '@components': './src/components',
-        '@contexts': './src/contexts/*',
+        '@contexts': './src/contexts',
         '@screens': './src/screens',
         '@services': './src/services',
         '@types': './src/types',
         '@utils': './src/utils',
+        '@src': './src',
       },
     },
-  ];
-
-  const plugins = [[...moduleResolver, 'module:react-native-dotenv']];
+  ]);
 
   return {
     presets,

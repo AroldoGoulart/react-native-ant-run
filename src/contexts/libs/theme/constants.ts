@@ -24,6 +24,7 @@ export const lightColors = {
   background: '#f8f9fa',
   text: '#212529',
   textAlt: '#f8f9fa',
+  card: '#fff',
 };
 
 export const darkColors = {
@@ -52,5 +53,6 @@ export const darkColors = {
   background: '#212529',
   text: '#f8f9fa',
   textAlt: '#212529',
+  card: '#343a40',
 };
 export const themeKey = '@theme';

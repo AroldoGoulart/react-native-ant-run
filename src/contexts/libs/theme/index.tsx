@@ -1,4 +1,3 @@
-import {getStoredItem} from '@utils/storage';
 import React, {
   createContext,
   useCallback,
@@ -6,23 +5,20 @@ import React, {
   useLayoutEffect,
   useState,
 } from 'react';
-import {ColorSchemeName, useColorScheme} from 'react-native';
+
+import { useColorScheme } from 'react-native';
+
+import { getStoredItem } from '@utils/storage';
 import {
   darkColors,
   lightColors,
   themeKey,
 } from '@contexts/libs/theme/constants';
-import {ThemeColorsType} from '@contexts/libs/theme/types';
-
-type ThemeContextType = {
-  colors: ThemeColorsType;
-  defaultSchema: ColorSchemeName;
-  changeTheme: () => void;
-};
+import { ThemeColorsType, ThemeContextType } from '@contexts/libs/theme/types';
 
 const ThemeContext = createContext({} as ThemeContextType);
 
-export const ThemeProvider = ({children}: {children: React.ReactNode}) => {
+export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
   const colorScheme = useColorScheme();
   const [selectedTheme, setSelectedTheme] = useState(colorScheme);
   const [colors, setColors] = useState<ThemeColorsType>(

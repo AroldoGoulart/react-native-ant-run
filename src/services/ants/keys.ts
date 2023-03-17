@@ -1,3 +1,3 @@
-import {QueryKey} from 'react-query';
+import { QueryKey } from 'react-query';
 
 export const createAnts = (): QueryKey => '@ants';
